@@ -1,332 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mental Math Tool</title>
-    <link rel="stylesheet" href="time.css">
+    <link rel="stylesheet" href="time.css" />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div class="tool-wrapper">
-        <div class="tool-container">
-            <div class="up">
-                <div class="title-tool-wr">
-                    <h1>MENTAL MATH </h1>
-                    <h1 class="smaller-title">PRACTICE TOOL</h1>
-                    <p id="rule">Knock down 5 calculations as FAST as possible while staying within the Allowed Margin.
-                        One wrong answer means you're out!</p>
-                </div>
-                <div class="options">
-                    <h3 class="small-title">Calculation Types</h3>
-                    <select id="option" onchange="changebtn()">
-                        <option value="1">Basic Operations(+-x÷)</option>
-                        <option value="2">Addition(+)</option>
-                        <option value="3">Subtraction(-)</option>
-                        <option value="4">Multiply(x)</option>
-                        <option value="5">Division(÷)</option>
-                        <option value="6">Percentage</option>
-                        <option value="7">xx% of ... is?</option>
-                        <option value="8">xx / xxx = ...%</option>
-                        <option value="9">Currency Conversion</option>
-                    </select>
-                    <h3 class="small-title">Allowed Margin of Error</h3>
-                    <label for="addend" class="pct"><input type="number" id="margin" step="1" placeholder="%"
-                            value="5"></label>
-                </div>
-                <div class="button-tool-wr">
-                    <button type="button" onclick="getOps()" id="start"><img src="./img/play.png" alt=""
-                            id="strt-btn"></button>
-                    <button onclick="restart()" class="rs" id="resetbtn" style="display:none"><img
-                            src="./img/reload-arrow.png" alt="" class="iconinbtn"></button>
-                </div>
-            </div>
-            <!-- <button onclick="stopwatch.lap()">Lap</button> -->
-            <div id="down" class="frame">
-                <table class="cal-wrapper">
-                    <tr>
-                        <th></th>
-                        <th>Operations</th>
-                        <th class="c3">Your Answer</th>
-                        <th>Correct Result</th>
-                        <th class="margin">Margin of Error</th>
-                        <th>Duration</th>
-                    </tr>
-                    <tr id="oprt1">
-                        <td>
-                            <p id="no">1</p>
-                        </td>
-                        <td class="c2">
-                            <p id="opt-1" class="opt"></p>
-                        </td>
-                        <td class="c3"><input type="text" id="res-1" class="ans"><img src="./img/right@2x.png" alt=""
-                                class="sign"><img src="./img/wrong@2x.png" alt="" class="sign"></td>
-                        <td class="res-out">
-                            <p class="reslog"></p>
-                        </td>
-                        <td class="margin">
-                            <p class="marginlog"></p>
-                        </td>
-                        <td class="time-out">
-                            <p class="timepass"></p>
-                        </td>
-                    </tr>
-                    <tr id="oprt2">
-                        <td>
-                            <p id="no">2</p>
-                        </td>
-                        <td class="c2">
-                            <p id="opt-2" class="opt"></p>
-                        </td>
-                        <td class="c3"><input type="text" id="res-2" class="ans"><img src="./img/right@2x.png" alt=""
-                                class="sign"><img src="./img/wrong@2x.png" alt="" class="sign"></td>
-                        <td class="res-out">
-                            <p class="reslog"></p>
-                        </td>
-                        <td class="margin">
-                            <p class="marginlog"></p>
-                        </td>
-                        <td class="time-out">
-                            <p class="timepass"></p>
-                        </td>
-                    </tr>
-                    <tr id="oprt3">
-                        <td>
-                            <p id="no">3</p>
-                        </td>
-                        <td class="c2">
-                            <p id="opt-3" class="opt"></p>
-                        </td>
-                        <td class="c3"><input type="text" id="res-3" class="ans"><img src="./img/right@2x.png" alt=""
-                                class="sign"><img src="./img/wrong@2x.png" alt="" class="sign"></td>
-                        <td class="res-out">
-                            <p class="reslog"></p>
-                        </td>
-                        <td class="margin">
-                            <p class="marginlog"></p>
-                        </td>
-                        <td class="time-out">
-                            <p class="timepass"></p>
-                        </td>
-                    </tr>
-                    <tr id="oprt4">
-                        <td>
-                            <p id="no">4</p>
-                        </td>
-                        <td class="c2">
-                            <p id="opt-4" class="opt"></p>
-                        </td>
-                        <td class="c3"><input type="text" id="res-4" class="ans"><img src="./img/right@2x.png" alt=""
-                                class="sign"><img src="./img/wrong@2x.png" alt="" class="sign"></td>
-                        <td class="res-out">
-                            <p class="reslog"></p>
-                        </td>
-                        <td class="margin">
-                            <p class="marginlog"></p>
-                        </td>
-                        <td class="time-out">
-                            <p class="timepass"></p>
-                        </td>
-                    </tr>
-                    <tr id="oprt5">
-                        <td>
-                            <p id="no">5</p>
-                        </td>
-                        <td class="c2">
-                            <p id="opt-5" class="opt"></p>
-                        </td>
-                        <td class="c3"><input type="text" id="res-5" class="ans"><img src="./img/right@2x.png" alt=""
-                                class="sign"><img src="./img/wrong@2x.png" alt="" class="sign"></td>
-                        <td class="res-out">
-                            <p class="reslog"></p>
-                        </td>
-                        <td class="margin">
-                            <p class="marginlog"></p>
-                        </td>
-                        <td class="time-out">
-                            <p class="timepass"></p>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="frame" style="display: none;" id="again">
-                <p style="text-align: center; margin-bottom: 1em;">You have been eliminated due to passing error margin!
-                    <br> Please try again
+      <div class="tool-container">
+        <div class="up">
+          <div class="title-tool-wr">
+            <h1>MENTAL MATH</h1>
+            <h1 class="smaller-title">PRACTICE TOOL</h1>
+            <p id="rule">
+              Knock down 5 calculations as FAST as possible while staying within
+              the Allowed Margin. One wrong answer means you're out!
+            </p>
+          </div>
+          <div class="options">
+            <h3 class="small-title">Calculation Types</h3>
+            <select id="option" onchange="changebtn()">
+              <option value="1">Basic Operations(+-x÷)</option>
+              <option value="2">Addition(+)</option>
+              <option value="3">Subtraction(-)</option>
+              <option value="4">Multiply(x)</option>
+              <option value="5">Division(÷)</option>
+              <option value="6">Percentage</option>
+              <option value="7">xx% of ... is?</option>
+              <option value="8">xx / xxx = ...%</option>
+              <option value="9">Currency Conversion</option>
+            </select>
+            <h3 class="small-title">Allowed Margin of Error</h3>
+            <label for="addend" class="pct"
+              ><input
+                type="number"
+                id="margin"
+                step="1"
+                placeholder="%"
+                value="5"
+            /></label>
+          </div>
+          <div class="button-tool-wr">
+            <button type="button" onclick="getOps()" id="start">
+              <img src="./img/play.png" alt="" id="strt-btn" />
+            </button>
+            <button
+              onclick="restart()"
+              class="rs"
+              id="resetbtn"
+              style="display: none"
+            >
+              <img src="./img/reload-arrow.png" alt="" class="iconinbtn" />
+            </button>
+          </div>
+        </div>
+        <!-- <button onclick="stopwatch.lap()">Lap</button> -->
+        <div id="down" class="frame">
+          <table class="cal-wrapper">
+            <tr>
+              <th></th>
+              <th>Operations</th>
+              <th class="c3">Your Answer</th>
+              <th>Correct Result</th>
+              <th class="margin">Margin of Error</th>
+              <th>Duration</th>
+            </tr>
+            <tr id="oprt1">
+              <td>
+                <p id="no">1</p>
+              </td>
+              <td class="c2">
+                <p id="opt-1" class="opt"></p>
+              </td>
+              <td class="c3">
+                <input type="number" id="res-1" class="ans" /><img
+                  src="./img/right@2x.png"
+                  alt=""
+                  class="sign"
+                /><img src="./img/wrong@2x.png" alt="" class="sign" />
+              </td>
+              <td class="res-out">
+                <p class="reslog"></p>
+              </td>
+              <td class="margin">
+                <p class="marginlog"></p>
+              </td>
+              <td class="time-out">
+                <p class="timepass"></p>
+              </td>
+            </tr>
+            <tr id="oprt2">
+              <td>
+                <p id="no">2</p>
+              </td>
+              <td class="c2">
+                <p id="opt-2" class="opt"></p>
+              </td>
+              <td class="c3">
+                <input type="number" id="res-2" class="ans" /><img
+                  src="./img/right@2x.png"
+                  alt=""
+                  class="sign"
+                /><img src="./img/wrong@2x.png" alt="" class="sign" />
+              </td>
+              <td class="res-out">
+                <p class="reslog"></p>
+              </td>
+              <td class="margin">
+                <p class="marginlog"></p>
+              </td>
+              <td class="time-out">
+                <p class="timepass"></p>
+              </td>
+            </tr>
+            <tr id="oprt3">
+              <td>
+                <p id="no">3</p>
+              </td>
+              <td class="c2">
+                <p id="opt-3" class="opt"></p>
+              </td>
+              <td class="c3">
+                <input type="number" id="res-3" class="ans" /><img
+                  src="./img/right@2x.png"
+                  alt=""
+                  class="sign"
+                /><img src="./img/wrong@2x.png" alt="" class="sign" />
+              </td>
+              <td class="res-out">
+                <p class="reslog"></p>
+              </td>
+              <td class="margin">
+                <p class="marginlog"></p>
+              </td>
+              <td class="time-out">
+                <p class="timepass"></p>
+              </td>
+            </tr>
+            <tr id="oprt4">
+              <td>
+                <p id="no">4</p>
+              </td>
+              <td class="c2">
+                <p id="opt-4" class="opt"></p>
+              </td>
+              <td class="c3">
+                <input type="number" id="res-4" class="ans" /><img
+                  src="./img/right@2x.png"
+                  alt=""
+                  class="sign"
+                /><img src="./img/wrong@2x.png" alt="" class="sign" />
+              </td>
+              <td class="res-out">
+                <p class="reslog"></p>
+              </td>
+              <td class="margin">
+                <p class="marginlog"></p>
+              </td>
+              <td class="time-out">
+                <p class="timepass"></p>
+              </td>
+            </tr>
+            <tr id="oprt5">
+              <td>
+                <p id="no">5</p>
+              </td>
+              <td class="c2">
+                <p id="opt-5" class="opt"></p>
+              </td>
+              <td class="c3">
+                <input type="number" id="res-5" class="ans" /><img
+                  src="./img/right@2x.png"
+                  alt=""
+                  class="sign"
+                /><img src="./img/wrong@2x.png" alt="" class="sign" />
+              </td>
+              <td class="res-out">
+                <p class="reslog"></p>
+              </td>
+              <td class="margin">
+                <p class="marginlog"></p>
+              </td>
+              <td class="time-out">
+                <p class="timepass"></p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="frame" style="display: none" id="again">
+          <p style="text-align: center; margin-bottom: 1em">
+            You have been eliminated due to passing error margin! <br />
+            Please try again
+          </p>
+          <div style="display: flex; justify-content: center">
+            <button
+              class="rs"
+              style="height: 40px; width: 120px"
+              onclick="restart()"
+            >
+              Try again
+            </button>
+            <button
+              class="rs"
+              style="height: 40px; width: 120px"
+              onclick="goback()"
+            >
+              Check answer
+            </button>
+          </div>
+        </div>
+        <hr class="endline" />
+        <div class="lower-frame">
+          <div class="logobox">
+            <img src="./img/instructions.png" alt="" />
+            <div class="popup">
+              <h3 class="instruction" onmouseover="showPop(this)">
+                Instructions
+              </h3>
+              <div class="pop-ins" id="popins">
+                <span class="ins-close" onclick="hidePop()">&times;</span>
+                <p class="inspop">
+                  Set up your type of calculations and margin of error on the
+                  upper-center of the screen
                 </p>
-                <div style="display: flex; justify-content: center;">
-                    <button class="rs" style="height: 40px; width: 120px;" onclick="restart()">Try again</button>
-                    <button class="rs" style="height: 40px; width: 120px;" onclick="goback()">Check answer</button>
-                </div>
+                <p class="inspop">
+                  Start by pressing the Play button, then in put your answers in
+                  the empty forms
+                </p>
+                <p class="inspop">
+                  Press ENTER to submit and move to next question
+                </p>
+              </div>
             </div>
-            <hr class="endline">
-            <div class="lower-frame">
-                <div class="logobox">
-                    <img src="./img/instructions.png" alt="">
-                    <div class="popup">
-                        <h3 class="instruction" onmouseover="showPop(this)">Instructions</h3>
-                        <div class="pop-ins" id="popins">
-                            <span class="ins-close" onclick="hidePop()">&times;</span>
-                            <p class="inspop">Set up your type of calculations and margin of error on the upper-center
-                                of the screen</p>
-                            <p class="inspop">Start by pressing the Play button, then in put your answers in the empty
-                                forms</p>
-                            <p class="inspop">Press ENTER to submit and move to next question</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="result-box">
-                    <h3>AVERAGE</h3>
-                    <h3 class="resnum"><span id="res1">00.00</span>%</h3>
-                    <h3 class="resnum"><span id="res2">00.00</span></h3>
-                </div>
-            </div>
+          </div>
+          <div class="result-box">
+            <h3>AVERAGE</h3>
+            <h3 class="resnum"><span id="res1">00.00</span>%</h3>
+            <h3 class="resnum"><span id="res2">00.00</span></h3>
+          </div>
         </div>
-        <div class="result">
-            <div class="upper-res">
-                <h3 class="small-title" id="title-result">Wall of fame</h3>
-            </div>
-            <p id="ldbname">Basic Operations</p>
-            <div class="res-wr">
-                <div class="res-pane" id="basic">
-                    <div id="basic-res" class="res-panel">
-                        <div class="players">
-                            <img src="./img/gold-medal.png" alt="" class="rank-icon">
-                            <div class="basic-plr">
-                                <h4 class="plr-name">Player 1</h4>
-                                <div class="stat">
-                                    <p class="avgdel">00.00%</p>
-                                    <p class="avgtime">00s 00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="players">
-                            <img src="./img/silver-medal.png" alt="" class="rank-icon">
-                            <div class="basic-plr">
-                                <h4 class="plr-name">Player 2</h4>
-                                <div class="stat">
-                                    <p class="avgdel">00.00%</p>
-                                    <p class="avgtime">00s 00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="players">
-                            <img src="./img/Bronze-medal.png" alt="" class="rank-icon">
-                            <div class="basic-plr">
-                                <h4 class="plr-name">Player 3</h4>
-                                <div class="stat">
-                                    <p class="avgdel">00.00%</p>
-                                    <p class="avgtime">00s 00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="players">
-                            <span class="rank-icon">4</span>
-                            <div class="basic-plr">
-                                <h4 class="plr-name">Player 4</h4>
-                                <div class="stat">
-                                    <p class="avgdel">00.00%</p>
-                                    <p class="avgtime">00s 00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="players">
-                            <span class="rank-icon">5</span>
-                            <div class="basic-plr">
-                                <h4 class="plr-name">Player 5</h4>
-                                <div class="stat">
-                                    <p class="avgdel">00.00%</p>
-                                    <p class="avgtime">00s 00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="players">
-                            <span class="rank-icon">6</span>
-                            <div class="basic-plr">
-                                <h4 class="plr-name">Player 6</h4>
-                                <div class="stat">
-                                    <p class="avgdel">00.00%</p>
-                                    <p class="avgtime">00s 00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="players">
-                            <span class="rank-icon">7</span>
-                            <div class="basic-plr">
-                                <h4 class="plr-name">Player 7</h4>
-                                <div class="stat">
-                                    <p class="avgdel">00.00%</p>
-                                    <p class="avgtime">00s 00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="players">
-                            <span class="rank-icon">8</span>
-                            <div class="basic-plr">
-                                <h4 class="plr-name">Player 8</h4>
-                                <div class="stat">
-                                    <p class="avgdel">00.00%</p>
-                                    <p class="avgtime">00s 00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="players">
-                            <span class="rank-icon">9</span>
-                            <div class="basic-plr">
-                                <h4 class="plr-name">Player 9</h4>
-                                <div class="stat">
-                                    <p class="avgdel">00.00%</p>
-                                    <p class="avgtime">00s 00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="players">
-                            <span class="rank-icon">10</span>
-                            <div class="basic-plr">
-                                <h4 class="plr-name">Player 10</h4>
-                                <div class="stat">
-                                    <p class="avgdel">00.00%</p>
-                                    <p class="avgtime">00s 00</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+      </div>
+      <div class="result">
+        <div class="upper-res">
+          <h3 class="small-title" id="title-result">Wall of fame</h3>
         </div>
-        <div class="model">
-            <!-- <button id="myBtn">Open Save Form</button> -->
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <div class="content-modal">
-                        <div class="upper-modal">
-                            <div class="modal-img">
-                                <img src="./img/podium.png" alt="">
-                            </div>
-                            <div class="content-modal">
-                                <h2 class="title-modal">CONGRATULATION!</h2>
-                                <h3 class="title2-modal">You have proved yourself as one of the Top 10 Mental
-                                    Calculators on this platform!</h3>
-                                <p>Please choose a name to display your victory on our Wall of Fame!</p>
-                            </div>
-                        </div>
-                        <div class="lower-modal">
-                            <input type="text" name="name-plr" id="name-plr" placeholder="Enter your name...">
-                            <button type="button" onclick="save()" class="modal-btn">Submit</button>
-                        </div>
-                    </div>
-
+        <p id="ldbname">Basic Operations</p>
+        <div class="res-wr">
+          <div class="res-pane" id="basic">
+            <div id="basic-res" class="res-panel">
+              <div class="players">
+                <img src="./img/gold-medal.png" alt="" class="rank-icon" />
+                <div class="basic-plr">
+                  <h4 class="plr-name">Player 1</h4>
+                  <div class="stat">
+                    <p class="avgdel">00.00%</p>
+                    <p class="avgtime">00s 00</p>
+                  </div>
                 </div>
+              </div>
+              <div class="players">
+                <img src="./img/silver-medal.png" alt="" class="rank-icon" />
+                <div class="basic-plr">
+                  <h4 class="plr-name">Player 2</h4>
+                  <div class="stat">
+                    <p class="avgdel">00.00%</p>
+                    <p class="avgtime">00s 00</p>
+                  </div>
+                </div>
+              </div>
+              <div class="players">
+                <img src="./img/Bronze-medal.png" alt="" class="rank-icon" />
+                <div class="basic-plr">
+                  <h4 class="plr-name">Player 3</h4>
+                  <div class="stat">
+                    <p class="avgdel">00.00%</p>
+                    <p class="avgtime">00s 00</p>
+                  </div>
+                </div>
+              </div>
+              <div class="players">
+                <span class="rank-icon">4</span>
+                <div class="basic-plr">
+                  <h4 class="plr-name">Player 4</h4>
+                  <div class="stat">
+                    <p class="avgdel">00.00%</p>
+                    <p class="avgtime">00s 00</p>
+                  </div>
+                </div>
+              </div>
+              <div class="players">
+                <span class="rank-icon">5</span>
+                <div class="basic-plr">
+                  <h4 class="plr-name">Player 5</h4>
+                  <div class="stat">
+                    <p class="avgdel">00.00%</p>
+                    <p class="avgtime">00s 00</p>
+                  </div>
+                </div>
+              </div>
+              <div class="players">
+                <span class="rank-icon">6</span>
+                <div class="basic-plr">
+                  <h4 class="plr-name">Player 6</h4>
+                  <div class="stat">
+                    <p class="avgdel">00.00%</p>
+                    <p class="avgtime">00s 00</p>
+                  </div>
+                </div>
+              </div>
+              <div class="players">
+                <span class="rank-icon">7</span>
+                <div class="basic-plr">
+                  <h4 class="plr-name">Player 7</h4>
+                  <div class="stat">
+                    <p class="avgdel">00.00%</p>
+                    <p class="avgtime">00s 00</p>
+                  </div>
+                </div>
+              </div>
+              <div class="players">
+                <span class="rank-icon">8</span>
+                <div class="basic-plr">
+                  <h4 class="plr-name">Player 8</h4>
+                  <div class="stat">
+                    <p class="avgdel">00.00%</p>
+                    <p class="avgtime">00s 00</p>
+                  </div>
+                </div>
+              </div>
+              <div class="players">
+                <span class="rank-icon">9</span>
+                <div class="basic-plr">
+                  <h4 class="plr-name">Player 9</h4>
+                  <div class="stat">
+                    <p class="avgdel">00.00%</p>
+                    <p class="avgtime">00s 00</p>
+                  </div>
+                </div>
+              </div>
+              <div class="players">
+                <span class="rank-icon">10</span>
+                <div class="basic-plr">
+                  <h4 class="plr-name">Player 10</h4>
+                  <div class="stat">
+                    <p class="avgdel">00.00%</p>
+                    <p class="avgtime">00s 00</p>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+      <div class="model">
+        <button id="myBtn">Open Save Form</button>
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="content-modal">
+              <div class="upper-modal">
+                <div class="modal-img">
+                  <img src="./img/podium.png" alt="" />
+                </div>
+                <div class="content-modal">
+                  <h2 class="title-modal">CONGRATULATION!</h2>
+                  <h3 class="title2-modal">
+                    You have proved yourself as one of the Top 10 Mental
+                    Calculators on this platform!
+                  </h3>
+                  <p>
+                    Please choose a name to display your victory on our Wall of
+                    Fame!
+                  </p>
+                </div>
+              </div>
+              <div class="lower-modal">
+                <input
+                  type="text"
+                  name="name-plr"
+                  id="name-plr"
+                  placeholder="Enter your name..."
+                />
+                <button type="button" onclick="save()" class="modal-btn">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-</body>
-<script src="time.js">
-</script>
-
+  </body>
+  <script src="time.js"></script>
 </html>
